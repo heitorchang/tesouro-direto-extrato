@@ -18,12 +18,11 @@ Por corretora
 <table>
   <tr>
 	<td>Corretora</td>
-	<td>Titulo</td>
-	<td>Vencimento</td>
+	<td>Titulo e vencimento</td>
 	<td>Qtde.</td>
 	<td>Investido</td>
-	<td>Preco</td>
-	<td>Atualizacao de preco</td>
+	<td>Preço</td>
+	<td>Atualiz.</td>
   </tr>
 
   {% for c in corretoras %}
@@ -32,12 +31,11 @@ Por corretora
 
   <tr>
 	<td>{{ c.nome }}</td>
-	<td>{{ titulo.nome }}</td>
-	<td>{{ titulo.vencimento|date:"Y-m-d" }}</td>
+	<td>{{ titulo.nome }}{{ titulo.vencimento|date:"-m-d" }}</td>
 	<td>{{ titulo.quantidade }}</td>
 	<td>{{ titulo.precoTotal }}</td>
 	<td>{{ titulo.preco }}</td>
-	<td>{{ titulo.precoAtualizado }}</td>
+	<td>{{ titulo.precoAtualizado|date:"Y-m-d" }}</td>
   </tr>
 
   {% endfor %}

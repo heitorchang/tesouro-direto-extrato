@@ -40,11 +40,11 @@ class Transacao(models.Model):
     """Compra ou venda (+ compra ou - venda)"""
     data = models.DateField()
     sinal = models.IntegerField(default=1)
-    titulo = models.ForeignKey(Titulo, on_delete=models.CASCADE)
     corretora = models.ForeignKey(Corretora, on_delete=models.CASCADE)
+    titulo = models.ForeignKey(Titulo, on_delete=models.CASCADE)
     quantidade = models.DecimalField(max_digits=6, decimal_places=2)
-    rendimento = models.DecimalField(max_digits=4, decimal_places=2)
     preco = models.DecimalField(max_digits=8, decimal_places=2)
+    rendimento = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     anotacoes = models.CharField(max_length=100, blank=True)
 
     def __str__(self):

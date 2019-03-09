@@ -2,7 +2,6 @@ from datetime import date
 from collections import defaultdict
 from decimal import Decimal
 
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Sum
@@ -43,9 +42,9 @@ def transacoes_total(trs):
 def agregarTransacoes(trs):
     """Collect total quantity and amount invested, grouped by bond"""
     titulos = defaultdict(TotalDeTitulo)
-    
+        
     for tr in trs:
-        nome = tr.titulo
+        nome = str(tr.titulo)
         titulos[nome].nome = nome
         titulos[nome].vencimento = tr.titulo.vencimento
         titulos[nome].quantidade += tr.sinal * tr.quantidade
@@ -56,15 +55,17 @@ def agregarTransacoes(trs):
         else:
             titulos[nome].preco = 0
             titulos[nome].precoAtualizado = date.today()
-    # titulos = sorted(titulos)
+
+    sortedTitulos = sorted(titulos)
+    print(titulos)
 
     result = []
     
-    for nomeDoTitulo in titulos:
+    for nomeDoTitulo in sortedTitulos:
         result.append({'nome': titulos[nomeDoTitulo].nome,
                        'vencimento': titulos[nomeDoTitulo].vencimento,
                        'quantidade': titulos[nomeDoTitulo].quantidade,
-                       'precoTotal': titulos[nomeDoTitulo].precoTotal,
+                       'precoTotal': "{:,.2f}".format(titulos[nomeDoTitulo].precoTotal),
                        'preco': "{:,.2f}".format(titulos[nomeDoTitulo].preco),
                        'precoAtualizado': titulos[nomeDoTitulo].precoAtualizado,})
         
