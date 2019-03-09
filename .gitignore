@@ -1,0 +1,25 @@
+# Emacs
+
+*~
+\#*\#
+.\#*
+
+
+# Python
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Django
+
+db.sqlite3
+
+
+# tab autocompletion
+
+migrate
+createsuperuser
+makemigrations
+runserver
