@@ -16,7 +16,7 @@ class Titulo(models.Model):
     precoAtualizado = models.DateField(blank=True, null=True)
     
     def __str__(self):
-        return "{} {}".format(tipo, vencimento)
+        return "{} {}".format(self.tipo, self.vencimento)
 
     class Meta:
         ordering = ['tipo', 'vencimento']
@@ -31,8 +31,9 @@ class Corretora(models.Model):
 
         
 class Transacao(models.Model):
-    """Compra ou venda (+/-)"""
+    """Compra ou venda (+ compra ou - venda)"""
     data = models.DateField()
+    sinal = models.IntegerField(default=1)
     titulo = models.ForeignKey(Titulo, on_delete=models.CASCADE)
     corretora = models.ForeignKey(Corretora, on_delete=models.CASCADE)
     quantidade = models.DecimalField(max_digits=6, decimal_places=2)
@@ -41,9 +42,12 @@ class Transacao(models.Model):
     anotacoes = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{} {} {} {} {} {} {}".format(
-            self.data, self.titulo, str(self.quantidade), self.corretora,
+        movimento = "Compra" if self.sinal == 1 else "Venda"
+        return "{} {} {}: {} x{} R$ {}".format(
+            self.data, movimento, self.corretora,
+            self.titulo, str(self.quantidade),
             str(self.preco))
 
     class Meta:
         ordering = ['-data', 'corretora', 'titulo']
+        verbose_name_plural = "Transações"

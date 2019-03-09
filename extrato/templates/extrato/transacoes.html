@@ -1,0 +1,30 @@
+Todas as transacoes
+
+<table>
+  <tr>
+	<td>Data</td>
+	<td>Mov.</td>
+	<td>Corretora</td>
+	<td>Titulo</td>
+	<td>Qtde.</td>
+	<td>Rend.</td>
+	<td>Preço</td>
+	<td>Anotações</td>
+  </tr>
+  
+
+  {% for tr in transacoes %}
+
+  <tr>
+	<td>{{ tr.data }}</td>
+	<td>{% if tr.sinal == 1 %}Compra{% else %}Venda{% endif %}</td>
+	<td>{{ tr.corretora }}</td>
+	<td>{{ tr.titulo }}</td>
+	<td>{{ tr.quantidade }}</td>
+	<td>{{ tr.rendimento }}</td>
+	<td>{{ tr.preco }}</td>
+	<td>{{ tr.anotacoes }}</td>
+  </tr>
+
+{% endfor %}
+</table>
