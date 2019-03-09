@@ -7,6 +7,9 @@ class Tipo(models.Model):
     def __str__(self):
         return self.nome
 
+    class Meta:
+        ordering = ['nome']
+        
 
 class Titulo(models.Model):
     """Titulo (tipo e vencimento)"""
@@ -29,6 +32,9 @@ class Corretora(models.Model):
     def __str__(self):
         return self.nome
 
+    class Meta:
+        ordering = ['nome']
+        
         
 class Transacao(models.Model):
     """Compra ou venda (+ compra ou - venda)"""
@@ -43,10 +49,10 @@ class Transacao(models.Model):
 
     def __str__(self):
         movimento = "Compra" if self.sinal == 1 else "Venda"
-        return "{} {} {}: {} x{} R$ {}".format(
+        return "{} {} {}: {} x{} R$ {} {}".format(
             self.data, movimento, self.corretora,
             self.titulo, str(self.quantidade),
-            str(self.preco))
+            str(self.preco), self.anotacoes)
 
     class Meta:
         ordering = ['-data', 'corretora', 'titulo']

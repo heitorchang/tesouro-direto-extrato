@@ -30,7 +30,7 @@ Por corretora
   <tr>
 	<td>{{ c.nome }}</td>
 	<td>{{ titulo.nome }}</td>
-	<td>{{ titulo.vencimento }}</td>
+	<td>{{ titulo.vencimento|date:"Y-m-d" }}</td>
 	<td>{{ titulo.quantidade }}</td>
 	<td>{{ titulo.precoTotal }}</td>
 	<td>{{ titulo.preco }}</td>
