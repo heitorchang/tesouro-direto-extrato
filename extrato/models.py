@@ -19,7 +19,7 @@ class Titulo(models.Model):
     precoAtualizado = models.DateField(blank=True, null=True)
     
     def __str__(self):
-        return "{} {}".format(self.tipo, self.vencimento)
+        return "{} {}".format(self.tipo, self.vencimento.year)
 
     class Meta:
         ordering = ['tipo', 'vencimento']
