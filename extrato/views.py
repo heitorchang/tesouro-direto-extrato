@@ -57,7 +57,6 @@ def agregarTransacoes(trs):
             titulos[nome].precoAtualizado = date.today()
 
     sortedTitulos = sorted(titulos)
-    print(titulos)
 
     result = []
     
