@@ -82,8 +82,15 @@ def index(request):
         corretorasDict[corretora].nome = corretora.nome
         corretorasDict[corretora].total = transacoes_total(transacoes)
         corretorasDict[corretora].titulos = agregarTransacoes(transacoes)
+
+    result = []
+
+    for nome in corretorasDict:
+        result.append({'nome': nome,
+                       'total': corretorasDict[nome].total,
+                       'aggregates': corretorasDict[nome].titulos})
         
-    return render(request, 'extrato/homepage.html', {'corretoras': corretoras})
+    return render(request, 'extrato/homepage.html', {'corretoras': result})
     
 
 def transacoes(request):

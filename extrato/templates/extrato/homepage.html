@@ -1,20 +1,42 @@
-Extrato de titulos
+Por corretora
+
+<table>
+{% for c in corretoras %}
+
+<tr>
+  <td>{{ c.nome }}</td>
+  <td>{{ c.total }}</td>
+</tr>
+
+{% endfor %}
+</table>
+
 
 <table>
   <tr>
+	<td>Corretora</td>
 	<td>Titulo</td>
+	<td>Vencimento</td>
 	<td>Qtde.</td>
 	<td>Investido</td>
+	<td>Preco</td>
+	<td>Atualizacao de preco</td>
   </tr>
-  
 
   {% for c in corretoras %}
 
+  {% for titulo in c.aggregates %}
+
   <tr>
-	<td>{{ c }}</td>
-	<td></td>
-	<td></td>
+	<td>{{ c.nome }}</td>
+	<td>{{ titulo.nome }}</td>
+	<td>{{ titulo.vencimento }}</td>
+	<td>{{ titulo.quantidade }}</td>
+	<td>{{ titulo.precoTotal }}</td>
+	<td>{{ titulo.preco }}</td>
+	<td>{{ titulo.precoAtualizado }}</td>
   </tr>
 
-{% endfor %}
+  {% endfor %}
+  {% endfor %}
 </table>
