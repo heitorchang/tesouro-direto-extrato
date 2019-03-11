@@ -12,6 +12,7 @@ Todas as transacoes
 	<td>Qtde.</td>
 	<td>Rend.</td>
 	<td>Preço</td>
+	<td>Editar</td>
 	<td>Anotações</td>
   </tr>
   
@@ -24,8 +25,9 @@ Todas as transacoes
 	<td>{{ tr.corretora }}</td>
 	<td>{{ tr.titulo }}</td>
 	<td>{{ tr.quantidade }}</td>
-	<td>{{ tr.rendimento }}</td>
+	<td>{{ tr.rendimento }}%</td>
 	<td>{{ tr.preco }}</td>
+	<td><a href="/admin/extrato/transacao/{{ tr.id }}/change/">editar</a></td>
 	<td>{{ tr.anotacoes }}</td>
   </tr>
 
