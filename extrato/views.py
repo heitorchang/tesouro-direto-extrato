@@ -87,7 +87,7 @@ def index(request):
 
     for nome in corretorasDict:
         result.append({'nome': nome,
-                       'total': corretorasDict[nome].total,
+                       'total': "{:,.2f}".format(corretorasDict[nome].total),
                        'aggregates': corretorasDict[nome].titulos})
         
     return render(request, 'extrato/homepage.html', {'corretoras': result})
