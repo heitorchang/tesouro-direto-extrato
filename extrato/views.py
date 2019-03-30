@@ -66,6 +66,7 @@ def agregarTransacoes(trs):
                        'quantidade': titulos[nomeDoTitulo].quantidade,
                        'precoTotal': "{:,.2f}".format(titulos[nomeDoTitulo].precoTotal),
                        'preco': "{:,.2f}".format(titulos[nomeDoTitulo].preco),
+                       'precoInvest': "{:010f}".format(titulos[nomeDoTitulo].precoTotal),
                        'precoAtualizado': titulos[nomeDoTitulo].precoAtualizado,})
         
     return result

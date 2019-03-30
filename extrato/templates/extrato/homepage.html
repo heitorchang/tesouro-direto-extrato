@@ -1,6 +1,7 @@
 {% extends "extrato/base.html" %}
 
 {% block content %}
+
 Por corretora
 
 <table>
@@ -16,29 +17,76 @@ Por corretora
 
 
 <table>
-  <tr>
-	<td>Corretora</td>
-	<td>Titulo e vencimento</td>
-	<td>Qtde.</td>
-	<td>Investido</td>
-	<td>Preço</td>
-	<td>Atualiz.</td>
-  </tr>
+  <thead>
+	<tr>
+	<th>Corretora</th>
+	<th>Titulo</th>
+	<th>Vencimento</th>
+	<th>Qtde.</th>
+	<th>Investido</th>
+	<th>Preço</th>
+	<th>SortInvest.</th>
+	<th>Atualiz.</th>
+    </tr>
+  </thead>
 
+  <tbody>
   {% for c in corretoras %}
 
   {% for titulo in c.aggregates %}
 
   <tr>
 	<td>{{ c.nome }}</td>
-	<td>{{ titulo.nome }}{{ titulo.vencimento|date:"-m-d" }}</td>
+	<td>{{ titulo.nome }}</td>
+	<td>{{ titulo.vencimento|date:"Y-m-d" }}</td>
 	<td>{{ titulo.quantidade }}</td>
 	<td>{{ titulo.precoTotal }}</td>
 	<td>{{ titulo.preco }}</td>
+	<td>{{ titulo.precoInvest }}</td>
 	<td>{{ titulo.precoAtualizado|date:"Y-m-d" }}</td>
   </tr>
 
   {% endfor %}
   {% endfor %}
+
+  </tbody>
 </table>
+
+
+<script>
+// https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript
+  function sortTable(table, col, reverse) {
+    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
+        i;
+    reverse = -((+reverse) || -1);
+    tr = tr.sort(function (a, b) { // sort rows
+        return reverse // `-1 *` if want opposite order
+            * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
+                .localeCompare(b.cells[col].textContent.trim())
+               );
+    });
+    for(i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+}
+
+function makeSortable(table) {
+    var th = table.tHead, i;
+    th && (th = th.rows[0]) && (th = th.cells);
+    if (th) i = th.length;
+    else return; // if no `<thead>` then do nothing
+    while (--i >= 0) (function (i) {
+        var dir = 1;
+        th[i].addEventListener('click', function () {sortTable(table, i, (dir = 1 - dir))});
+    }(i));
+}
+
+function makeAllSortable(parent) {
+    parent = parent || document.body;
+    var t = parent.getElementsByTagName('table'), i = t.length;
+    while (--i >= 0) makeSortable(t[i]);
+}
+
+		  window.onload = function () {makeAllSortable();};
+</script>
+
 {% endblock %}
