@@ -20,7 +20,7 @@ Todas as transacoes
   {% for tr in transacoes %}
 
   <tr>
-	<td>{{ tr.data }}</td>
+	<td>{{ tr.data|date:"Y-m-d" }}</td>
 	<td>{% if tr.sinal == 1 %}Compra{% else %}Venda{% endif %}</td>
 	<td>{{ tr.corretora }}</td>
 	<td>{{ tr.titulo }}</td>
