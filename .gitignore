@@ -23,3 +23,8 @@ migrate
 createsuperuser
 makemigrations
 runserver
+
+
+# backup
+
+backup/
