@@ -61,14 +61,15 @@ def agregarTransacoes(trs):
     result = []
     
     for nomeDoTitulo in sortedTitulos:
-        result.append({'nome': titulos[nomeDoTitulo].nome,
-                       'vencimento': titulos[nomeDoTitulo].vencimento,
-                       'quantidade': titulos[nomeDoTitulo].quantidade,
-                       'precoTotal': "{:,.2f}".format(titulos[nomeDoTitulo].precoTotal),
-                       'preco': "{:,.2f}".format(titulos[nomeDoTitulo].preco),
-                       'precoAtual': "{:,.2f}".format(titulos[nomeDoTitulo].quantidade * titulos[nomeDoTitulo].preco),
-                       'precoInvest': "{:010f}".format(titulos[nomeDoTitulo].precoTotal),
-                       'precoAtualizado': titulos[nomeDoTitulo].precoAtualizado,})
+        if titulos[nomeDoTitulo].quantidade > 0:
+            result.append({'nome': titulos[nomeDoTitulo].nome,
+                           'vencimento': titulos[nomeDoTitulo].vencimento,
+                           'quantidade': titulos[nomeDoTitulo].quantidade,
+                           'precoTotal': "{:,.2f}".format(titulos[nomeDoTitulo].precoTotal),
+                           'preco': "{:,.2f}".format(titulos[nomeDoTitulo].preco),
+                           'precoAtual': "{:,.2f}".format(titulos[nomeDoTitulo].quantidade * titulos[nomeDoTitulo].preco),
+                           'precoInvest': "{:010f}".format(titulos[nomeDoTitulo].precoTotal),
+                           'precoAtualizado': titulos[nomeDoTitulo].precoAtualizado,})
         
     return result
 
