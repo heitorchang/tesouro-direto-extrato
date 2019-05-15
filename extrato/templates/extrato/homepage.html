@@ -2,8 +2,6 @@
 
 {% block content %}
 
-Por corretora
-
 <table>
 {% for c in corretoras %}
 
@@ -13,6 +11,15 @@ Por corretora
 </tr>
 
 {% endfor %}
+
+<tr><td colspan="2">&nbsp;</td></tr>
+
+<tr><td><b>Total</b></td>
+  <td>{{ grandTotal }}</td>
+</tr>
+
+<tr><td colspan="2">&nbsp;</td></tr>
+
 </table>
 
 

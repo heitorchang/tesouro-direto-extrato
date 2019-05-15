@@ -80,12 +80,16 @@ def index(request):
 
     corretorasDict = defaultdict(TitulosDeCorretora)
 
+    grandTotal = Decimal('0.00')
+    
     for corretora in corretoras:
         transacoes = Transacao.objects.filter(corretora=corretora)
         corretorasDict[corretora].nome = corretora.nome
         corretorasDict[corretora].total = transacoes_total(transacoes)
         corretorasDict[corretora].titulos = agregarTransacoes(transacoes)
 
+        grandTotal += corretorasDict[corretora].total
+        
     result = []
 
     for nome in corretorasDict:
@@ -93,7 +97,8 @@ def index(request):
                        'total': "{:,.2f}".format(corretorasDict[nome].total),
                        'aggregates': corretorasDict[nome].titulos})
         
-    return render(request, 'extrato/homepage.html', {'corretoras': result})
+    return render(request, 'extrato/homepage.html', {'corretoras': result,
+                                                     'grandTotal': "{:,.2f}".format(grandTotal)})
     
 
 def transacoes(request):
